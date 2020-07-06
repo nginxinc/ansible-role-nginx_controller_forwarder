@@ -1,0 +1,33 @@
+---
+# tasks file for ansible-role-nginx_controller_forwarder
+
+- name: Fail if required variables are not defined
+  assert:
+    that: ("{{ item }} is defined") and ("{{ item }} | length > 0")
+  loop:
+    - nginx_controller_api_version
+    - nginx_controller_fqdn
+    - nginx_controller_auth_token
+    - nginx_controller_forwarder.metadata.name
+
+- name: Form the forwarder url
+  set_fact:
+    nginx_controller_forwarder_url: >-
+      https://{{ nginx_controller_fqdn }}/{{ nginx_controller_api_version }}/analytics/forwarders/{{ nginx_controller_forwarder.metadata.name }}
+
+- name: Upsert the forwarder definition
+  uri:
+    url: "{{ nginx_controller_forwarder_url }}"
+    method: "PUT"
+    body: "{{ nginx_controller_forwarder }}"
+    body_format: json
+    status_code:
+      - 200
+      - 201
+      - 202
+    return_content: yes
+    validate_certs: "{{ nginx_controller_validate_certs | default(false) }}"
+    headers:
+      Cookie: "{{ nginx_controller_auth_token }}"
+  register: nginx_controller_forwarder_current_status
+  ignore_errors: false

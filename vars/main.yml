@@ -1,0 +1,21 @@
+---
+# vars file for ansible-role-nginx_controller_user_role
+
+# nginx_controller_forwarder:
+#   metadata:
+#     name:  # the name of the data forwarder
+#     displayName:   # a friendly display name for the data forwarder (spaces and special characters allowed)
+#     description:  # a description of the data forwarder
+#     tags:   # an array of tags
+#     - tagOne
+#     - tagTwo
+#   desiredState:
+#     integrationRef:  # reference to an existing Integration ( target URI and credential )
+#       ref: "/platform/integrations/splunk-demo"
+#     streams:
+#     -
+#       inputDataType: "metrics"   # [ metrics] source within NGINX Controller.  
+#       outputFormat: "splunk"    # [splunk, collectd] known data output formats
+#       selector: ""    # a selection string to filter metrics  ( 3.7 )
+ 
+
