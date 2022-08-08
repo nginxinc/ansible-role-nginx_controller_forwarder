@@ -1,6 +1,8 @@
 NGINX Controller Data Forwarder Role
 ==========================
 
+# This repository has been archived. There will likely be no further development on the project and security vulnerabilities may be unaddressed.
+
 Manage data forwarder settings with NGINX Controller.
 
 Requirements
